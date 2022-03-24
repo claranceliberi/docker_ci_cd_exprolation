@@ -20,7 +20,7 @@ services:
       links:
         - api
       depends_on:
-        - api
+        - app
       env_file:
         - ./server/.env
       volumes: 
