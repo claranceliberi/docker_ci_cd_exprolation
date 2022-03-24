@@ -1,6 +1,9 @@
 version: "3"
 services:
   nginx:
+      image: ntwaricliberi/nginx:latest
+      stdin_open: true 
+      tty: true 
       build: 
         context: ./nginx
         dockerfile: Dockerfile
@@ -10,6 +13,9 @@ services:
       depends_on:
         - client
   client:
+      image: ntwaricliberi/client:latest
+      stdin_open: true 
+      tty: true 
       container_name: client
       restart: always
       build: 
@@ -26,6 +32,9 @@ services:
       volumes: 
         - ./client:/client
   app:
+    image: ntwaricliberi/api:latest
+    stdin_open: true 
+    tty: true 
     container_name: api
     restart: always
     build: 
@@ -42,6 +51,9 @@ services:
     volumes: 
       - .server:/elec-meter
   postgres:
+    image: ntwaricliberi/postgres:latest
+    stdin_open: true 
+    tty: true 
     container_name: postgres
     build: 
       context: ./server
@@ -55,6 +67,9 @@ services:
 
 
   pgadmin:
+    image: ntwaricliberi/pgadmin:latest
+    stdin_open: true 
+    tty: true 
     container_name: pgadmin
     image: dpage/pgadmin4
     restart: always
