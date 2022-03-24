@@ -17,6 +17,8 @@ services:
         dockerfile: Dockerfile
       ports:
         - "3000:3000"
+      links:
+        - app
       depends_on:
         - app
       env_file:
