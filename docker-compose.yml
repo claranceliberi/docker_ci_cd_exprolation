@@ -17,10 +17,8 @@ services:
         dockerfile: Dockerfile
       ports:
         - "3000:3000"
-      links:
-        - api
       depends_on:
-        - app
+        - api
       env_file:
         - ./server/.env
       volumes: 
