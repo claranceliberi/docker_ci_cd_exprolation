@@ -4,7 +4,7 @@ services:
     container_name: elec-meter
     restart: always
     build: 
-      context: .
+      context: ./server
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
@@ -13,19 +13,19 @@ services:
     depends_on:
       - postgres
     env_file:
-      - .env
+      - ./server/.env
     volumes: 
       - .:/elec-meter
   postgres:
     container_name: postgres
     build: 
-      context: .
+      context: ./server
       dockerfile: pg.Dockerfile
     ports:
       - "5432:5432"
     volumes:
-      - ./postgresdata:/var/lib/postgresql/rca_auth
-      - ./src/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+      - ./server/postgresdata:/var/lib/postgresql/rca_auth
+      - ./server/src/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
     restart: always
 
 
