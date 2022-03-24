@@ -65,7 +65,6 @@ services:
       - ./server/src/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
     restart: always
 
-
   pgadmin:
     image: ntwaricliberi/pgadmin:latest
     stdin_open: true 
