@@ -14,6 +14,10 @@ FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 # Remove default nginx static assets
 RUN rm -rf ./*
+
+# copy ngnix configurations
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+
 # Copy static assets from builder stage
 COPY --from=builder /app/dist .
 # Containers run nginx with global directives and daemon off
