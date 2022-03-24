@@ -1,11 +1,28 @@
-FROM node:17
+FROM node:16-alpine As development
 
-WORKDIR /elec-meter
+WORKDIR /usr/src/app
 
-COPY package.json /elec-meter/package.json
+COPY package*.json ./
 
-RUN yarn install
+RUN yarn install 
 
-COPY . /elec-meter
+COPY . .
 
-CMD [ "yarn","start:debug"]
+RUN yarn build
+
+FROM node:16-alpine As production
+
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN yarn install --prod
+
+COPY . .
+
+COPY --from=development /usr/src/app/dist ./dist
+
+CMD ["node", "dist/main"]
